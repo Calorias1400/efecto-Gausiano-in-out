@@ -1,39 +1,41 @@
-# TUTORIAL PASO A PASO: Efecto Blur Dinámico para .mogrt
+# TUTORIAL PASO A PASO: Efecto Blur Dinámico para Reels (9:16)
 
 ## REQUISITOS PREVIOS
 - After Effects 2020 o superior
 - Conocimiento básico de After Effects
 - 15 minutos de tiempo
+- **FORMATO**: Vertical 9:16 para Instagram Reels, TikTok, YouTube Shorts
 
 ---
 
 ## PARTE 1: CONFIGURACIÓN INICIAL
 
-### PASO 1: Crear Nueva Composición
+### PASO 1: Crear Nueva Composición (Formato Vertical 9:16)
 1. Abre **After Effects**
 2. Click en **Composition** → **New Composition** (Ctrl+N)
 3. En el diálogo que aparece:
-   - **Preset**: Selecciona "HDTV 1080 29.97"
-   - **Width**: 1920
-   - **Height**: 1080
-   - **Frame Rate**: 29.97 fps
-   - **Duration**: 10:00 (10 segundos)
+   - **Preset**: Selecciona "Custom" (no hay preset 9:16 por defecto)
+   - **Width**: 1080
+   - **Height**: 1920
+   - **Pixel Aspect Ratio**: Square Pixels
+   - **Frame Rate**: 30 fps (ideal para reels)
+   - **Duration**: 15:00 (15 segundos, típico para reels)
    - **Background Color**: Negro
 4. Click **OK**
-5. **Nombra tu composición**: "Blur_Dinamico_Template"
+5. **Nombra tu composición**: "Blur_Reels_9x16"
 
-### PASO 2: Crear Capa Base
+### PASO 2: Crear Capa Base (Formato Vertical)
 1. Click derecho en el **Panel Timeline** (área vacía)
 2. Selecciona **New** → **Solid**
 3. En el diálogo **Solid Settings**:
-   - **Name**: "Base_Layer"
-   - **Width**: 1920
-   - **Height**: 1080
+   - **Name**: "Base_Layer_Reels"
+   - **Width**: 1080
+   - **Height**: 1920
    - **Color**: Blanco (#FFFFFF)
 4. Click **OK**
 
 ### PASO 3: Aplicar Efecto Gaussian Blur
-1. Con la capa "Base_Layer" seleccionada
+1. Con la capa "Base_Layer_Reels" seleccionada
 2. Ve al menú **Effect** → **Blur & Sharpen** → **Gaussian Blur**
 3. Verás que aparece en el **Panel Effects Controls**
 4. **NO toques nada aún**, solo verifica que esté aplicado
@@ -93,7 +95,7 @@
 ## PARTE 3: APLICAR LA EXPRESIÓN
 
 ### PASO 9: Preparar para Expresión
-1. En el **Timeline Panel**, expande la capa "Base_Layer"
+1. En el **Timeline Panel**, expande la capa "Base_Layer_Reels"
 2. Expande **Effects**
 3. Expande **Gaussian Blur**
 4. Verás el parámetro **Blurriness** con valor por defecto
@@ -157,9 +159,9 @@ valorBlur;
 ### PASO 11: Vincular Expresión a Controles
 1. En **Essential Graphics Panel**, click derecho en "Intensidad_Inicio"
 2. Selecciona **Edit Properties**
-3. En **Source**, debe aparecer tu composición "Blur_Dinamico_Template"
+3. En **Source**, debe aparecer tu composición "Blur_Reels_9x16"
 4. Click en el dropdown y selecciona:
-   - **Base_Layer** → **Effects** → **Intensidad_Inicio** → **Slider**
+   - **Base_Layer_Reels** → **Effects** → **Intensidad_Inicio** → **Slider**
 5. Click **OK**
 
 **REPITE EL PASO 11 PARA LOS OTROS 3 SLIDERS:**
@@ -193,15 +195,15 @@ Prueba cada slider y verifica:
 
 ### PASO 14: Preparar Exportación
 1. **Guarda tu proyecto**: Ctrl+S
-2. En **Project Panel**, selecciona la composición "Blur_Dinamico_Template"
+2. En **Project Panel**, selecciona la composición "Blur_Reels_9x16"
 3. **Click derecho** → **Export as Motion Graphics Template**
 
-### PASO 15: Configurar Exportación
+### PASO 15: Configurar Exportación (Específico para Reels)
 1. En el diálogo **Export as Motion Graphics Template**:
-   - **Template Name**: "Blur_Dinamico_v1"
+   - **Template Name**: "Blur_Reels_9x16_v1"
    - **Version**: 1.0.0
    - **Author**: Tu nombre
-   - **Description**: "Efecto de blur dinámico con controles independientes"
+   - **Description**: "Efecto blur dinámico para Reels (9:16) - Instagram, TikTok, YouTube Shorts"
 2. **Destination**: Elige dónde guardar
 3. Click **OK**
 
@@ -220,13 +222,13 @@ Prueba cada slider y verifica:
 4. Selecciona tu archivo .mogrt
 5. Click **Open**
 
-### PASO 18: Aplicar Efecto
-1. Arrastra cualquier clip (imagen, video) a la timeline
+### PASO 18: Aplicar Efecto en Reels
+1. Arrastra cualquier clip vertical (imagen, video 9:16) a la timeline
 2. Ve a **Graphics** → **Browse**
-3. Encuentra tu template "Blur_Dinamico_v1"
-4. **Arrastra el template sobre tu clip**
+3. Encuentra tu template "Blur_Reels_9x16_v1"
+4. **Arrastra el template sobre tu clip de reel**
 5. Ve al panel **Essential Graphics**
-6. **¡VERÁS TUS 4 CONTROLES FUNCIONANDO!**
+6. **¡VERÁS TUS 4 CONTROLES FUNCIONANDO EN FORMATO VERTICAL!**
 
 ---
 
@@ -258,18 +260,38 @@ Prueba cada slider y verifica:
 
 ---
 
+## VENTAJAS ESPECÍFICAS PARA REELS
+
+### ¿Por qué este efecto es perfecto para Reels?
+- **Captura atención inmediata**: El blur inicial engancha al viewer
+- **Transición suave**: Revela el contenido de forma elegante
+- **Salida memorable**: El blur final crea un cierre profesional
+- **Formato optimizado**: Diseñado específicamente para 9:16
+- **Fácil aplicación**: Arrastra y suelta sobre cualquier clip vertical
+
+### Casos de uso ideales:
+- **Revelación de productos**: Perfecto para mostrar artículos
+- **Transiciones entre clips**: Une diferentes tomas suavemente
+- **Intro/outro dinámico**: Entrada y salida profesional
+- **Destacar momentos**: Enfoca la atención en contenido clave
+
 ## TIPS FINALES
 
-### Para Mejores Resultados:
-- **Usa clips de 5+ segundos** para ver mejor el efecto
-- **Ajusta Frame Rate** según tu proyecto
+### Para Mejores Resultados en Reels:
+- **Usa clips de 5-15 segundos** (duración típica de reels)
+- **Frame Rate 30fps** es perfecto para plataformas sociales
+- **Prueba con fotos y videos verticales** (9:16)
 - **Guarda copias** de tu proyecto de After Effects
-- **Documenta** qué valores funcionan mejor para diferentes tipos de clips
+- **Valores recomendados para reels**:
+  - Intensidad_Inicio: 30-50 (no muy agresivo)
+  - Duracion_Inicio_Frames: 3-6 frames
+  - Intensidad_Fin: 30-50 
+  - Duracion_Fin_Frames: 3-6 frames
 
 ### Personalización Avanzada:
 - Puedes cambiar los valores **Min/Max** de los sliders
 - Puedes añadir más controles (color, dirección, etc.)
 - Puedes modificar la función **ease()** por otras curvas
 
-**¡EFECTO COMPLETADO!** 
-Tu archivo .mogrt está listo para usar en cualquier proyecto de Premiere Pro.
+**¡EFECTO PARA REELS COMPLETADO!** 
+Tu archivo .mogrt está listo para crear reels profesionales en Instagram, TikTok y YouTube Shorts con formato vertical 9:16.
