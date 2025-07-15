@@ -39,6 +39,12 @@ Antes de aplicar la expresión, necesitas crear los sliders que serán expuestos
 - **Valor por defecto**: 4
 - **Rango**: 1 - 30
 
+### Comportamiento Predeterminado
+Con los valores por defecto, el efecto trabajará así:
+- **Frame 1-4**: Blur pasa de 40 → 0 (entrada suave)
+- **Frames medios**: Sin blur (imagen nítida)
+- **Últimos 4 frames**: Blur pasa de 0 → 40 (salida suave)
+
 ## Código de Expresión
 
 Aplica esta expresión al parámetro **Blurriness** del efecto Gaussian Blur:
@@ -130,11 +136,14 @@ Después de aplicar la expresión, debes vincular los sliders creados:
 
 1. Importa el archivo .mogrt en Premiere Pro
 2. Arrastra el efecto sobre cualquier clip (imagen, video, etc.)
-3. Ajusta los controles en el panel **Essential Graphics**:
-   - **Intensidad_Inicio**: Intensidad del blur al comenzar el clip
-   - **Duracion_Inicio_Frames**: Duración en frames de la transición de entrada
-   - **Intensidad_Fin**: Intensidad del blur al finalizar el clip
-   - **Duracion_Fin_Frames**: Duración en frames de la transición de salida
+3. **¡Listo!** El efecto ya funciona con los valores predeterminados:
+   - Blur 40 → 0 en los primeros 4 frames
+   - Blur 0 → 40 en los últimos 4 frames
+4. **Opcional**: Ajusta los controles en el panel **Essential Graphics**:
+   - **Intensidad_Inicio**: Intensidad del blur al comenzar el clip (predeterminado: 40)
+   - **Duracion_Inicio_Frames**: Duración en frames de la transición de entrada (predeterminado: 4)
+   - **Intensidad_Fin**: Intensidad del blur al finalizar el clip (predeterminado: 40)
+   - **Duracion_Fin_Frames**: Duración en frames de la transición de salida (predeterminado: 4)
 
 ## Características del Efecto
 
@@ -147,6 +156,13 @@ Después de aplicar la expresión, debes vincular los sliders creados:
 ✅ **Máxima flexibilidad**: Intensidades y duraciones diferentes para entrada y salida
 
 ## Ejemplos de Uso Creativo
+
+### Efecto Predeterminado (Sin ajustes)
+- **Intensidad_Inicio**: 40
+- **Intensidad_Fin**: 40  
+- **Duracion_Inicio_Frames**: 4
+- **Duracion_Fin_Frames**: 4
+- **Resultado**: Transición simétrica perfecta
 
 ### Efecto Asimétrico
 - **Intensidad_Inicio**: 60 (blur fuerte al inicio)
