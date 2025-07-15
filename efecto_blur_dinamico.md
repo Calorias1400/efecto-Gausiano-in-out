@@ -15,20 +15,26 @@ Antes de aplicar la expresión, necesitas crear los sliders que serán expuestos
 2. Selecciona tu composición
 3. Crea los siguientes controles:
 
-#### Control 1: Blur Máximo
-- **Nombre**: "Blur Max"
+#### Control 1: Intensidad de Inicio
+- **Nombre**: "Intensidad_Inicio"
 - **Tipo**: Slider
 - **Valor por defecto**: 40
 - **Rango**: 0 - 100
 
-#### Control 2: Duración de Entrada
-- **Nombre**: "Entrada (frames)"
+#### Control 2: Duración de Inicio
+- **Nombre**: "Duracion_Inicio_Frames"
 - **Tipo**: Slider  
 - **Valor por defecto**: 4
 - **Rango**: 1 - 30
 
-#### Control 3: Duración de Salida
-- **Nombre**: "Salida (frames)"
+#### Control 3: Intensidad de Fin
+- **Nombre**: "Intensidad_Fin"
+- **Tipo**: Slider
+- **Valor por defecto**: 40
+- **Rango**: 0 - 100
+
+#### Control 4: Duración de Fin
+- **Nombre**: "Duracion_Fin_Frames"
 - **Tipo**: Slider
 - **Valor por defecto**: 4
 - **Rango**: 1 - 30
@@ -38,13 +44,14 @@ Antes de aplicar la expresión, necesitas crear los sliders que serán expuestos
 Aplica esta expresión al parámetro **Blurriness** del efecto Gaussian Blur:
 
 ```javascript
-// === EXPRESIÓN PARA BLUR DINÁMICO ===
+// === EXPRESIÓN PARA BLUR DINÁMICO CON CONTROLES INDEPENDIENTES ===
 
 // Obtener controles del Essential Graphics Panel
 // Asegúrate de que estos nombres coincidan exactamente con los sliders creados
-var blurMax = effect("Blur Max")("Slider");
-var duracionEntrada = effect("Entrada (frames)")("Slider");
-var duracionSalida = effect("Salida (frames)")("Slider");
+var intensidadInicio = effect("Intensidad_Inicio")("Slider");
+var duracionInicioFrames = effect("Duracion_Inicio_Frames")("Slider");
+var intensidadFin = effect("Intensidad_Fin")("Slider");
+var duracionFinFrames = effect("Duracion_Fin_Frames")("Slider");
 
 // Obtener información del tiempo
 var duracionTotal = thisComp.duration;
@@ -52,38 +59,38 @@ var tiempoActual = time;
 var fps = 1/thisComp.frameDuration;
 
 // Convertir frames a tiempo
-var tiempoEntrada = duracionEntrada / fps;
-var tiempoSalida = duracionSalida / fps;
+var tiempoInicio = duracionInicioFrames / fps;
+var tiempoFin = duracionFinFrames / fps;
 
 // Calcular puntos de transición
-var inicioSalida = duracionTotal - tiempoSalida;
+var inicioSalida = duracionTotal - tiempoFin;
 
 // Variable para almacenar el valor del blur
 var valorBlur = 0;
 
 // FASE DE ENTRADA (primeros frames)
-if (tiempoActual <= tiempoEntrada) {
+if (tiempoActual <= tiempoInicio) {
     // Progreso de 0 a 1 durante la entrada
-    var progreso = tiempoActual / tiempoEntrada;
+    var progreso = tiempoActual / tiempoInicio;
     
-    // Aplicar easing suave y calcular blur (de blurMax a 0)
+    // Aplicar easing suave y calcular blur (de intensidadInicio a 0)
     var easeProgreso = ease(progreso, 0, 1);
-    valorBlur = blurMax * (1 - easeProgreso);
+    valorBlur = intensidadInicio * (1 - easeProgreso);
 }
 
 // FASE MEDIA (sin blur)
-else if (tiempoActual > tiempoEntrada && tiempoActual < inicioSalida) {
+else if (tiempoActual > tiempoInicio && tiempoActual < inicioSalida) {
     valorBlur = 0;
 }
 
 // FASE DE SALIDA (últimos frames)  
 else if (tiempoActual >= inicioSalida) {
     // Progreso de 0 a 1 durante la salida
-    var progreso = (tiempoActual - inicioSalida) / tiempoSalida;
+    var progreso = (tiempoActual - inicioSalida) / tiempoFin;
     
-    // Aplicar easing suave y calcular blur (de 0 a blurMax)
+    // Aplicar easing suave y calcular blur (de 0 a intensidadFin)
     var easeProgreso = ease(progreso, 0, 1);
-    valorBlur = blurMax * easeProgreso;
+    valorBlur = intensidadFin * easeProgreso;
 }
 
 // Retornar el valor final del blur
@@ -124,17 +131,40 @@ Después de aplicar la expresión, debes vincular los sliders creados:
 1. Importa el archivo .mogrt en Premiere Pro
 2. Arrastra el efecto sobre cualquier clip (imagen, video, etc.)
 3. Ajusta los controles en el panel **Essential Graphics**:
-   - **Blur Max**: Intensidad máxima del desenfoque
-   - **Entrada (frames)**: Duración de la transición de entrada
-   - **Salida (frames)**: Duración de la transición de salida
+   - **Intensidad_Inicio**: Intensidad del blur al comenzar el clip
+   - **Duracion_Inicio_Frames**: Duración en frames de la transición de entrada
+   - **Intensidad_Fin**: Intensidad del blur al finalizar el clip
+   - **Duracion_Fin_Frames**: Duración en frames de la transición de salida
 
 ## Características del Efecto
 
 ✅ **Adaptación automática**: Se ajusta a cualquier duración de clip
 ✅ **Transiciones suaves**: Usa `ease()` para movimientos naturales  
-✅ **Controles dinámicos**: Sliders personalizables en Premiere Pro
+✅ **Controles independientes**: Control separado de inicio y final
+✅ **Controles dinámicos**: 4 sliders personalizables en Premiere Pro
 ✅ **Sin keyframes**: Completamente controlado por expresiones
 ✅ **Reutilizable**: Funciona en cualquier tipo de media (foto, video, etc.)
+✅ **Máxima flexibilidad**: Intensidades y duraciones diferentes para entrada y salida
+
+## Ejemplos de Uso Creativo
+
+### Efecto Asimétrico
+- **Intensidad_Inicio**: 60 (blur fuerte al inicio)
+- **Intensidad_Fin**: 20 (blur suave al final)
+- **Duracion_Inicio_Frames**: 6 (transición lenta de entrada)
+- **Duracion_Fin_Frames**: 2 (transición rápida de salida)
+
+### Efecto Solo de Entrada
+- **Intensidad_Inicio**: 40
+- **Intensidad_Fin**: 0 (sin blur al final)
+- **Duracion_Inicio_Frames**: 8
+- **Duracion_Fin_Frames**: 1
+
+### Efecto de Enfoque Dramático
+- **Intensidad_Inicio**: 80 (muy desenfocado)
+- **Intensidad_Fin**: 100 (máximo blur al final)
+- **Duracion_Inicio_Frames**: 12 (transición muy lenta)
+- **Duracion_Fin_Frames**: 8
 
 ## Solución de Problemas
 
